@@ -1,5 +1,6 @@
 import React from "react"
 import {NavLink} from 'react-router-dom'
+import AuthService from '../services/auth.service'
 
 class Navbar extends React.Component {
     render() {
@@ -17,6 +18,9 @@ class Navbar extends React.Component {
                                 {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
                             </li>
                         </ul>
+
+                       
+                        
                         <ul class="navbar-nav ml-auto">
                             
                             <li class="nav-item">
@@ -34,8 +38,9 @@ class Navbar extends React.Component {
                             </li>
 
                             <li class="nav-item">
-                                <NavLink to="/" className="nav-link">Wyloguj się</NavLink>
-                                {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
+                                <a href="/" className="nav-link" onClick={AuthService.logout}>
+                                    Wyloguj
+                                </a>
                             </li>
                         </ul>
                     </div>
