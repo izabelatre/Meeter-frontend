@@ -38,11 +38,11 @@ const required = value => {
     }
   };
 
-  var token = ""
+  var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjIyOTkzMTIzLCJleHAiOjE2MjI5OTY3MjN9.s3bstwMdr2yKzXpkvpggYG89J-zP56QmdaKdEKIiUok"
 
-if (AuthService.getCurrentUser() != null) {
-    token = AuthService.getCurrentUser().token
-}
+// if (AuthService.getCurrentUser() != null) {
+//     token = AuthService.getCurrentUser().token
+// }
 
 const URL = 'http://localhost:8080/api/'
 const headers = {

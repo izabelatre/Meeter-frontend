@@ -176,7 +176,7 @@ fieldset.login {
     display: block;
     text-align: center;
     opacity: 0.9;
-    color:#000
+    color:rgb(0, 0, 0)
   }
 /*END OF LOGIN REGISTER PART*/
 
@@ -249,6 +249,102 @@ fieldset.adding {
     text-align: center;
     opacity: 0.8;
     color:#000
+  }
+  
+
+  /*COLOR CHANGE*/
+  /*LOGIN REGISTER PART*/
+
+body.login_color {
+    /*background-image: url("../img/gif.gif");*/
+    background-color: #f1f6f7;
+    min-height: 100vh;
+    display: flex;
+    font-weight: 400;
+    font-family: Lato;
+    background-position: fixed;
+}
+fieldset.login_color {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 4rem;
+    font-family: 'Varela Round';
+    display: block;
+    text-align: center;
+    opacity: 0.9;
+    color:rgb(8, 221, 79)
+  }
+/*END OF LOGIN REGISTER PART*/
+
+  body.report_color {
+    /*background-image: url("../img/gif.gif");*/
+    background-color: #cae2e2;
+    height: 100%;
+    min-height: 100%;
+    height: 85vh;
+    display: flex;
+    font-weight: 800;
+    font-family: Lato;
+    background-position: fixed;
+}
+fieldset.report_color {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 4rem;
+    font-family: 'Varela Round';
+    display: block;
+    text-align: center;
+    opacity: 0.8;
+    color:rgb(8, 221, 79)
+  }
+  
+  body.afterLogin_color {
+    background-image: url("../img/background.gif");
+    background-color: #cae2e2;
+    height: 100%;
+    min-height: 100%;
+    height: 100vh;
+    display: flex;
+    font-weight: 800;
+    font-family: Lato;
+    background-position: fixed;
+    background-size: 'cover';
+    background-repeat:  'no-repeat';
+}
+fieldset.afterLogin_color {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 4rem;
+    font-family: 'Varela Round';
+    white-space: pre-line;
+    display: block;
+    text-align: center;
+    opacity: 0.8;
+    color:rgb(8, 221, 79)
+  }
+
+  body.adding_color {
+    background-color: #cae2e2;
+    height: 100%;
+    min-height: 100%;
+    height: 100vh;
+    display: flex;
+    font-weight: 800;
+    font-family: Lato;
+    background-position: fixed;
+    background-size: 'cover';
+    background-repeat:  'no-repeat';
+}
+fieldset.adding_color {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 4rem;
+    font-family: 'Varela Round';
+    white-space: pre-line;
+    display: block;
+    text-align: center;
+    opacity: 0.8;
+    color:rgb(8, 221, 79)
   }
   
 

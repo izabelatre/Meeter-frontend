@@ -11,8 +11,9 @@ class AfterLoginPage extends React.Component {
           <Navbar text1="Zgłoś błąd" text3 = "Zaplanuj spotkanie" text2 = "Dodaj plan dnia"/>
           </section>
           <section>
-            <body class="afterLogin">
-                <fieldset class="afterLogin">
+               <body class="afterLogin">
+               <fieldset class="afterLogin">
+            
                 <br></br> <br></br> <br></br>
                     <h1>Witamy w aplikacji Meeter!</h1>
                     <br></br>

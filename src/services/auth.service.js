@@ -22,6 +22,11 @@ class AuthService {
     localStorage.removeItem("token");
   }
 
+  colorChange(){
+    
+    localStorage.setItem("color", "yes")
+  }
+
   register(user, email, pass) {
     return axios.post(API_URL + "register", {
       code: user,

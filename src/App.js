@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 //Pages
+import AuthService from "./services/auth.service"
 import HomePage from "./pages"
 import NotFoundPage from "./pages/404"
 import RegisterPage from "./pages/register"
@@ -17,6 +18,39 @@ import DayPlanPage from "./pages/dayPlan"
 import PlansPage from "./pages/plans"
 
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.logOut = this.logOut.bind(this);
+
+    this.state = {
+      currentUser: AuthService.getCurrentUser()
+    };
+  }
+
+  componentDidMount() {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      this.setState({
+        currentUser: user
+      });
+    }
+  }
+
+  isLoggedIn(){
+    console.log(this.state.currentUser);
+    if(this.state.currentUser == null){
+      return false;
+    }
+    else{
+      return true;
+    }
+  }
+
+  logOut() {
+    AuthService.logout();
+  }
+
   render() {
     return <Router>
       <Switch>
