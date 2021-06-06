@@ -13,6 +13,8 @@ import RegisterPage from "./pages/register"
 import LoginPage from "./pages/login"
 import AfterLoginPage from "./pages/afterLogin"
 import ReportPage from "./pages/report"
+import DayPlanPage from "./pages/dayPlan"
+import PlansPage from "./pages/plans"
 
 class App extends React.Component {
   render() {
@@ -24,6 +26,8 @@ class App extends React.Component {
         <Route exact path ="/login" component={LoginPage} />
         <Route exact path ="/welcome" component={AfterLoginPage} />
         <Route exact path ="/report" component={ReportPage} />
+        <Route exact path ="/dayplan" component={DayPlanPage} />
+        <Route exact path ="/plans" component={PlansPage} />
         <Redirect to="/404"/>
       </Switch>
     </Router>

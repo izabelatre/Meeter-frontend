@@ -8,7 +8,7 @@ class AfterLoginPage extends React.Component {
     return (
         <div>
           <section>
-          <Navbar text1="Zgłoś błąd"/>
+          <Navbar text1="Zgłoś błąd" text3 = "Zaplanuj spotkanie" text2 = "Dodaj plan dnia"/>
           </section>
           <section>
             <body class="afterLogin">

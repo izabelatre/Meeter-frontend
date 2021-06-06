@@ -24,6 +24,16 @@ class Navbar extends React.Component {
                                 {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
                             </li>
                             <li class="nav-item">
+                                <NavLink to="/plans" className="nav-link"> {this.props.text3}</NavLink>
+                                {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
+                            </li>
+
+                            <li class="nav-item">
+                                <NavLink to="/dayplan" className="nav-link"> {this.props.text2}</NavLink>
+                                {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
+                            </li>
+
+                            <li class="nav-item">
                                 <NavLink to="/" className="nav-link">Wyloguj się</NavLink>
                                 {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
                             </li>
