@@ -126,7 +126,7 @@ class LoginPage extends Component {
                     />
                   </div>
       
-      <br></br><br></br>
+                  <br></br><br></br>
                   <div className="form-group">
                     <button
                       className="btn btn-secondary btn-block"

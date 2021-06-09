@@ -54,14 +54,14 @@ class App extends React.Component {
   render() {
     return <Router>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" render={() => (this.isLoggedIn() ? (<Redirect to="/welcome"/>) : (<HomePage />))} />
         <Route exact path ="/404" component={NotFoundPage} />
         <Route exact path ="/register" component={RegisterPage} />
         <Route exact path ="/login" component={LoginPage} />
-        <Route exact path ="/welcome" component={AfterLoginPage} />
-        <Route exact path ="/report" component={ReportPage} />
-        <Route exact path ="/dayplan" component={DayPlanPage} />
-        <Route exact path ="/plans" component={PlansPage} />
+        <Route exact path ="/welcome" render={() => (this.isLoggedIn() ? (<AfterLoginPage />) :  (<Redirect to="/"/>))} />
+        <Route exact path ="/report" render={() => (this.isLoggedIn() ? (<ReportPage />) :  (<Redirect to="/"/>))}  />
+        <Route exact path ="/dayplan" render={() => (this.isLoggedIn() ? (<DayPlanPage />) :  (<Redirect to="/"/>))} />
+        <Route exact path ="/plans" render={() => (this.isLoggedIn() ? (<PlansPage />) :  (<Redirect to="/"/>))}  />
         <Redirect to="/404"/>
       </Switch>
     </Router>

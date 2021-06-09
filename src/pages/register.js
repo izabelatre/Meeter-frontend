@@ -5,7 +5,6 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-
 import AuthService from "../services/auth.service";
 
 const required = value => {
@@ -17,11 +16,12 @@ const required = value => {
       );
     }
   };
-  const vusername = value => {
+
+  const vcode = value => {
     if (value.length < 0 || value.length > 20) {
       return (
         <div className="alert alert-danger" role="alert">
-          The code must be between 3 and 20 characters.
+          The code must be between 0 and 20 characters.
         </div>
       );
     }
@@ -53,7 +53,7 @@ class RegisterPage extends Component {
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangeCode = this.onChangeCode.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
     
         this.state = {
@@ -75,9 +75,9 @@ class RegisterPage extends Component {
         });
       }
 
-      onChangeUsername(e) {
+      onChangeCode(e) {
         this.setState({
-          username: e.target.value
+          code: e.target.value
         });
       }
     
@@ -140,15 +140,14 @@ class RegisterPage extends Component {
                   <br></br> 
                 {!this.state.successful && (
                   <div>
-                       <div className="form-group">
-                  <label htmlFor="username">Code</label>
+                  <div className="form-group">
+                  <label >Code</label>
                   <Input
                     type="text"
                     className="form-control"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
+                    value={this.state.code}
+                    onChange={this.onChangeCode}
+                    validations={[required, vcode]}
                     placeholder="Code"
                   />
                 </div>
@@ -178,7 +177,7 @@ class RegisterPage extends Component {
                         placeholder="Hasło"
                       />
                     </div>
-    <br></br>
+                    <br></br>
                     <div className="form-group">
                       <button className="btn btn-secondary btn-block">Zarejestruj się</button>
                     </div>

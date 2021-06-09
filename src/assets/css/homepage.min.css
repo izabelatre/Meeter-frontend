@@ -5,6 +5,7 @@
  */
 
  /*HOMEPAGE/DEFAULT PART  might have to be modified to prevent CSS overlap*/
+
 body {
     font-family: Lato
 }
@@ -53,9 +54,10 @@ h1, h2, h3, h4, h5, h6 {
 header.masthead {
     position: relative;
     overflow: hidden;
+    height: 100vh;
     padding-top: calc(7rem + 72px);
     padding-bottom: 7rem;
-    background: linear-gradient(0deg, #0da38ac4 0, #5cb429 100%);
+    background: linear-gradient(0deg, #0da38ac4 0, #9db48f 100%);
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: scroll;
@@ -79,7 +81,7 @@ header.masthead .bg-circle {
     z-index: 0;
     position: absolute;
     border-radius: 100%;
-    background: linear-gradient(0deg, #5cb429 0, #0da38ac4 100%)
+    background: linear-gradient(0deg, #56b320 0, #0bb99cc4 100%)
 }
 
 header.masthead .bg-circle-1 {
@@ -185,7 +187,7 @@ fieldset.login {
     background-color: #cae2e2;
     height: 100%;
     min-height: 100%;
-    height: 85vh;
+    height: 100vh;
     display: flex;
     font-weight: 800;
     font-family: Lato;
@@ -252,100 +254,6 @@ fieldset.adding {
   }
   
 
-  /*COLOR CHANGE*/
-  /*LOGIN REGISTER PART*/
-
-body.login_color {
-    /*background-image: url("../img/gif.gif");*/
-    background-color: #f1f6f7;
-    min-height: 100vh;
-    display: flex;
-    font-weight: 400;
-    font-family: Lato;
-    background-position: fixed;
-}
-fieldset.login_color {
-    background-color: #ffffff;
-    margin: auto;
-    padding: 4rem;
-    font-family: 'Varela Round';
-    display: block;
-    text-align: center;
-    opacity: 0.9;
-    color:rgb(8, 221, 79)
-  }
-/*END OF LOGIN REGISTER PART*/
-
-  body.report_color {
-    /*background-image: url("../img/gif.gif");*/
-    background-color: #cae2e2;
-    height: 100%;
-    min-height: 100%;
-    height: 85vh;
-    display: flex;
-    font-weight: 800;
-    font-family: Lato;
-    background-position: fixed;
-}
-fieldset.report_color {
-    background-color: #ffffff;
-    margin: auto;
-    padding: 4rem;
-    font-family: 'Varela Round';
-    display: block;
-    text-align: center;
-    opacity: 0.8;
-    color:rgb(8, 221, 79)
-  }
-  
-  body.afterLogin_color {
-    background-image: url("../img/background.gif");
-    background-color: #cae2e2;
-    height: 100%;
-    min-height: 100%;
-    height: 100vh;
-    display: flex;
-    font-weight: 800;
-    font-family: Lato;
-    background-position: fixed;
-    background-size: 'cover';
-    background-repeat:  'no-repeat';
-}
-fieldset.afterLogin_color {
-    background-color: #ffffff;
-    margin: auto;
-    padding: 4rem;
-    font-family: 'Varela Round';
-    white-space: pre-line;
-    display: block;
-    text-align: center;
-    opacity: 0.8;
-    color:rgb(8, 221, 79)
-  }
-
-  body.adding_color {
-    background-color: #cae2e2;
-    height: 100%;
-    min-height: 100%;
-    height: 100vh;
-    display: flex;
-    font-weight: 800;
-    font-family: Lato;
-    background-position: fixed;
-    background-size: 'cover';
-    background-repeat:  'no-repeat';
-}
-fieldset.adding_color {
-    background-color: #ffffff;
-    margin: auto;
-    padding: 4rem;
-    font-family: 'Varela Round';
-    white-space: pre-line;
-    display: block;
-    text-align: center;
-    opacity: 0.8;
-    color:rgb(8, 221, 79)
-  }
   
 
   

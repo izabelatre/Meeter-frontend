@@ -1,7 +1,5 @@
 import React from 'react'
-import Footer from '../components/Footer.js'
 import axios from 'axios'
-//import DatePicker from 'react-date-picker';
 import 'react-dropdown/style.css';
 import background from '../assets/img/background.gif';
 import MaterialTable from 'material-table'
@@ -12,11 +10,12 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 
-var token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNjIyOTkzMTIzLCJleHAiOjE2MjI5OTY3MjN9.s3bstwMdr2yKzXpkvpggYG89J-zP56QmdaKdEKIiUok"
+var token = ""
 
-// if (AuthService.getCurrentUser() != null) {
-//     token = AuthService.getCurrentUser().token
-// }
+if (AuthService.getCurrentUser() != null) {
+    token = AuthService.getCurrentUser().token
+}
+
 const URL = 'http://localhost:8080/api/'
 const headers = {
 headers: {
@@ -43,10 +42,6 @@ const wrongValueAndRequiredPlan = value => {
   }
 };
 
-
-
-
-
 class DisplayPage extends React.Component {
 
     constructor(props) {
@@ -57,14 +52,11 @@ class DisplayPage extends React.Component {
     this.onChangeSecondPlan = this.onChangeSecondPlan.bind(this);
 
   this.state = {
-    array: [],
     table: [],
     time: "",
-    data: [],
     successful: false,
     message: "",
-    columns: [
-     // { title: "ID", field: "id" },
+    columns_plans: [
       { title: "Nazwa", field: "name" },
       { title: "ID", field: "plan_id" },
       { title: "Start dnia", field: "day_start"},
@@ -74,7 +66,7 @@ class DisplayPage extends React.Component {
       { title: "Początek spotkania", field: "start"},
       { title: "Koniec spotkania", field: "end" }
     ],
-    data: [{ name: '', plan_id: "", day_start: "", day_end: ""  }],
+    data_plans: [{ name: '', plan_id: "", day_start: "", day_end: ""  }],
     data_meetings: []
   };
 }
@@ -90,15 +82,10 @@ handleDisplay(e) {
   this.form.validateAll();
 
   if (this.checkBtn.context._errors.length === 0) {
-    
-
     var data = {
       meeting_time: this.state.time, 
       day_plan_ids: [this.state.firstPlan, this.state.secondPlan ]
-      
   }
-
-  console.log("klik")
 
   axios.post(URL + 'meeting-times', data, headers)
       .then((res) =>
@@ -106,34 +93,6 @@ handleDisplay(e) {
             data_meetings: res.data.meetings
           })
           )
-
-
-    // axios.post()
-    // AuthService.register(
-    //   this.state.username,
-    //   this.state.email,
-    //   this.state.password
-    // ).then(
-    //   response => {
-    //     this.setState({
-    //       message: response.data.message,
-    //       successful: true
-    //     });
-    //   },
-    //   error => {
-    //     const resMessage =
-    //       (error.response &&
-    //         error.response.data &&
-    //         error.response.data.message) ||
-    //       error.message ||
-    //       error.toString();
-
-    //     this.setState({
-    //       successful: false,
-    //       message: resMessage
-    //     });
-    //   }
-    // );
   }
 }
 
@@ -142,9 +101,8 @@ componentDidMount () {
   axios.get(URL + 'plans', headers )
   .then(res => 
     this.setState({
-    data: res.data}) 
+    data_plans: res.data}) 
   )
-  console.log(localStorage.getItem("token"))
 }
 
 onChangeTime(e) {
@@ -166,108 +124,93 @@ onChangeSecondPlan(e) {
 }
 
   render() {
-    const { array } = this.state;
   return (
     
    <div style={{ backgroundImage: `url(${background})` }}>
           <section>
           <Navbar text1="Zgłoś błąd" text3 = "Zaplanuj spotkanie" text2 = "Dodaj plan dnia"/>
           </section>
-  <body class="login">
-              <fieldset class="login">
-
-
-                <div className="App">
-                  <h1>Spotkania</h1>
-                  <br></br>
-                  <MaterialTable
-                    title="Plany dnia"
-                        data= {this.state.data}
-                         columns= {this.state.columns}
-                   />
+              <body class="login">
+                <fieldset class="login">
+                  <div className="App">
+                    <h1>Spotkania</h1>
+                    <br></br>
+                    <MaterialTable
+                      title="Plany dnia"
+                      data= {this.state.data_plans}
+                      columns= {this.state.columns_plans}
+                    />
                   </div>
-
 
                   <Form
- 
-                  onSubmit={this.handleDisplay}
-                  ref={c => {
-                   this.form = c;
-                   }}
-   >
-     <br></br><br></br>
-                   <h4>Dodaj godziny spotkania</h4>
-                   <br></br> 
+                    onSubmit={this.handleDisplay}
+                    ref={c => { this.form = c;}}
+                  >
+                    <br></br><br></br>
+                    <h4>Dodaj godziny spotkania</h4>
+                    <br></br> 
                     {!this.state.successful && (
                       <div>
-                    <div className="form-group">
-                        <Input
+                        <div className="form-group">
+                          <Input
+                            type="text"
+                            className="form-control"
+                            value={this.state.time}
+                            onChange={this.onChangeTime}
+                            validations={[wrongValueAndRequired]}
+                            placeholder="Czas spotkania"
+                          />
+                        </div>
+
+                        <div className="form-group">
+                          <Input
+                            type="text"
+                            className="form-control"
+                            value={this.state.firstPlan}
+                            onChange={this.onChangeFirstPlan}
+                            validations={[wrongValueAndRequiredPlan] }
+                            placeholder="Plan pierwszy"
+                          />
+                        </div>
+
+                        <div className="form-group">
+                          <Input
                           type="text"
                           className="form-control"
-                          value={this.state.time}
-                          onChange={this.onChangeTime}
-                          validations={[wrongValueAndRequired]}
-                          placeholder="Czas spotkania"
-                        />
+                          value={this.state.secondPlan}
+                          onChange={this.onChangeSecondPlan}
+                          validations={[wrongValueAndRequiredPlan] }
+                          placeholder="Plan drugi"
+                          />
+                        </div>
+
+                        <br></br>
+                        <div className="form-group">
+                          <button className="btn btn-secondary btn-block">Dodaj spotkanie</button>
+                        </div>
+                        <p style={{ 'white-space': 'pre-wrap'}}>{"Wszystkie pola muszą zostać uzupełnione. "}</p>           
                       </div>
+                        )}
 
-                    <div className="form-group">
-                      <Input
-                       type="text"
-                        className="form-control"
-                        value={this.state.firstPlan}
-                        onChange={this.onChangeFirstPlan}
-                        validations={[wrongValueAndRequiredPlan] }
-                        placeholder="Plan pierwszy"
-                      />
-                  </div>
-
-                  <div className="form-group">
-                      <Input
-                       type="text"
-                        className="form-control"
-                        value={this.state.secondPlan}
-                        onChange={this.onChangeSecondPlan}
-                        validations={[wrongValueAndRequiredPlan] }
-                        placeholder="Plan drugi"
-                      />
-                  </div>
-
-<br></br>
-         <div className="form-group">
-           <button className="btn btn-secondary btn-block">Dodaj spotkanie</button>
-         </div>
-         <p style={{ 'white-space': 'pre-wrap'}}>{"Wszystkie pola muszą zostać uzupełnione. "}</p>           
-       </div>
-     )}
-
-     <CheckButton
-       style={{ display: "none" }}
-       ref={c => {
-         this.checkBtn = c;
-       }}
-     />
-
-     <br></br>
-         </Form>
-         
-         <div className="App">
-                  <h3>Możliwe spotkania:</h3>
-                  <MaterialTable
-                    title="Spotkania"
-                        data= {this.state.data_meetings}
-                         columns= {this.state.columns_meetings}
+                        <CheckButton
+                          style={{ display: "none" }}
+                          ref={c => {
+                            this.checkBtn = c; }}
+                        />
+                        <br></br>
+                  </Form>
+                  <div className="App">
+                    <h3>Możliwe spotkania:</h3>
+                    <MaterialTable
+                      title="Spotkania"
+                      data= {this.state.data_meetings}
+                      columns= {this.state.columns_meetings}
                    />
                   </div>
 
-                  </fieldset>
-            </body>
-
-        </div>
-
-  );
-}
+                </fieldset>
+              </body>
+      </div>);}
 }
    
-
 export default DisplayPage;

@@ -13,7 +13,6 @@ class AfterLoginPage extends React.Component {
           <section>
                <body class="afterLogin">
                <fieldset class="afterLogin">
-            
                 <br></br> <br></br> <br></br>
                     <h1>Witamy w aplikacji Meeter!</h1>
                     <br></br>

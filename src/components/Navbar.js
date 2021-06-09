@@ -14,18 +14,15 @@ class Navbar extends React.Component {
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
                                 <NavLink to="/" className="nav-link"> HOME</NavLink>
-                                {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             
                             <li class="nav-item">
                                 <NavLink to="/register" className="nav-link"> {this.props.text1}</NavLink>
-                                {/*<a class="nav-link" href="register">{this.props.text1}</a>*/}
                             </li>
                             <li class="nav-item">
                                 <NavLink to="/login" className="nav-link">{this.props.text2}</NavLink>
-                                {/*<a class="nav-link" href="login">{this.props.text2}</a>*/}
                             </li>
                         </ul>
                     </div>
