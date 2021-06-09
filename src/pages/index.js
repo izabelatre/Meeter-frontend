@@ -1,6 +1,5 @@
 import React from 'react'
 import Navbar from '../components/Navbar.js'
-import Footer from '../components/Footer.js'
 import Image1 from '../assets/img/calendar2.gif'
 
 class HomePage extends React.Component {
@@ -27,7 +26,6 @@ class HomePage extends React.Component {
             </div>
           </div>
         </section>
-        <Footer />
       </div>
     );
   }

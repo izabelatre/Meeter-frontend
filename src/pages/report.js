@@ -18,7 +18,7 @@ class ReportPage extends React.Component {
                       <h3>meeter@meeter.com</h3>
                   </fieldset>
               </body>
-              </section>
+            </section>
               <Footer />
           </div>
       );
