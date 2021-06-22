@@ -204,7 +204,7 @@ onChangeSecondPlan(e) {
                               onRowUpdate: (newData, oldData) =>
                                 new Promise((resolve, reject) => {
                                     var newPlan = {
-                                      
+                                      id: oldData.id,
                                       name: newData.name,
                                       day_start: oldData.day_start,
                                       day_end: oldData.day_end,
