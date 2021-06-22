@@ -142,7 +142,11 @@ handleDisplay(e) {
 
 componentDidMount () {
 
-  this.getPlans();
+  axios.get(URL + 'plans', headers )
+  .then(res => 
+    this.setState({
+    data_plans: res.data}) 
+  )
 }
 
 getPlans (){
@@ -152,6 +156,8 @@ getPlans (){
     this.setState({
     data_plans: res.data}) 
   )
+  window.location.reload();
+  
 }
 
 onChangeTime(e) {
@@ -198,13 +204,18 @@ onChangeSecondPlan(e) {
                               onRowUpdate: (newData, oldData) =>
                                 new Promise((resolve, reject) => {
                                     var newPlan = {
+                                      
                                       name: newData.name,
+                                      day_start: oldData.day_start,
+                                      day_end: oldData.day_end,
+                                      meetings: oldData.meetings
                                       
                                 }
                                                   
-                                axios.patch(URL + "plans/" + oldData.plan_id, newPlan, headers)
+                                axios.put(URL + "plans/" + oldData.plan_id, newPlan, headers)
                                     .then(this.getPlans())
                                     resolve(this.getPlans())
+                                    
                                     }),
 
                               onRowDelete: oldData =>
