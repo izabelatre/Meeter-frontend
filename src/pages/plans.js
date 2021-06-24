@@ -151,11 +151,6 @@ componentDidMount () {
 
 getPlans (){
 
-  axios.get(URL + 'plans', headers )
-  .then(res => 
-    this.setState({
-    data_plans: res.data}) 
-  )
   window.location.reload();
   
 }
@@ -213,7 +208,6 @@ onChangeSecondPlan(e) {
                                 }
                                                   
                                 axios.put(URL + "plans/" + oldData.plan_id, newPlan, headers)
-                                    .then(this.getPlans())
                                     resolve(this.getPlans())
                                     
                                     }),
@@ -221,7 +215,6 @@ onChangeSecondPlan(e) {
                               onRowDelete: oldData =>
                                 new Promise((resolve, reject) => {
                                 axios.delete(URL + "plans/" + oldData.plan_id, headers)
-                                .then(this.getPlans())
                                 resolve(this.getPlans())
                                   }),
                               }}
