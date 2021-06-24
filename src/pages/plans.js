@@ -194,7 +194,7 @@ onChangeSecondPlan(e) {
                   <div className="App">
                     <h1>Spotkania</h1>
                     <br></br>
-                    <MaterialTable
+                  <MaterialTable
                   title="Plany dnia"
                   icons={tableIcons}
                   data= {this.state.data_plans}
@@ -300,7 +300,7 @@ onChangeSecondPlan(e) {
                         <br></br>
                   </Form>
                   <div className="App">
-                    <h3>Możliwe spotkania:</h3>
+                    <h3>Możliwe ramy czasowe spotkania:</h3>
                     <MaterialTable
                       icons={tableIcons}
                       title="Spotkania"

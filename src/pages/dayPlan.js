@@ -101,7 +101,7 @@ class DayPlanPage extends React.Component {
         this.onChangeStart = this.onChangeStart.bind(this);
         this.handleEnd = this.handleEnd.bind(this);
         this.onChangeName = this.onChangeName.bind(this);
-        this.refresh = this.refresh.bind(this);
+        this.reload = this.reload.bind(this);
 
         this.state = {
         start_day: "",
@@ -123,7 +123,11 @@ class DayPlanPage extends React.Component {
         };
       }
 
-      
+      componentDidMount () {
+
+        console.log(this.state.meetings.length)
+      }
+
       onChangeStartDay(e) {
         this.setState({
           start_day: e.target.value
@@ -167,21 +171,54 @@ class DayPlanPage extends React.Component {
           successful: false
         });
   
-          if (this.state.start < this.state.end && (this.state.start.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) && (this.state.end.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) ) {   
-            this.setState(prevState => ({
+        var lenght = this.state.meetings.length
+        var check = true
+        var check2 = false
+        console.log(lenght)
+        
+          if (this.state.start <= this.state.end && (this.state.start.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) && (this.state.end.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) ) {   
+            if(lenght!=0){
+              for(var i = 0 ; i < lenght ; i++){
+                if(this.state.start >= this.state.meetings[i].start && this.state.start <= this.state.meetings[i].end  )
+                  check = false
+                  check2 = true
+              
+                if(this.state.end >= this.state.meetings[i].start && this.state.end <= this.state.meetings[i].end )
+                  check = false
+                  check2 = true
+              }
+            }
+            
+            }
+            else {
+              check = false
+            }
+
+            if(check == true){
+              this.setState(prevState => ({
                 meetings: [...prevState.meetings, {start: this.state.start, end: this.state.end}],
                 table: [...prevState.table, {start: this.state.start, end: this.state.end}],
                 successful1: true,
                 message1: "Dodano spotkanie"
               }))
-        }
+            }
+
         else{
-          this.setState(prevState => ({
-            successful1: false,
-            message1: "Podano nieprawidłowe dane."
-          }))
+          if(check2 = true){
+            this.setState(prevState => ({
+              successful1: false,
+              message1: "Spotkanie koliduje z już istniejącym."
+            }))
+          }
+          else{
+            this.setState(prevState => ({
+              successful1: false,
+              message1: "Podano nieprawidłowe dane."
+            }))
+          }
+          
         }
-      console.log(this.state.meetings)
+      
     }
 
    
@@ -201,26 +238,44 @@ class DayPlanPage extends React.Component {
                 name: this.state.name, 
                 meetings: this.state.meetings
                }
-             axios.post(URL + 'plans', data, headers).then(res =>
+
+               var lenght = this.state.meetings.length
+               var check = true
+                
+              if(lenght!=0){
+                for(var i = 0 ; i < lenght ; i++){
+                  if(data.start_day > this.state.meetings[i].start || data.end_day < this.state.meetings[i])
+                         check = false
+                }
+              }
+                   
+             if(check = true){
+              axios.post(URL + 'plans', data, headers).then(res =>
+                this.setState({
+                    successful: true,
+                    message: "Dodano plan pomyślnie",
+                    meetings: [],
+                    table: [],
+                    start_day: null,
+                    end_day: null,
+                    name: null
               
-             this.setState({
-               successful: true,
-              message: "Dodano plan pomyślnie",
-              meetings: [],
-              table: [],
-              start_day: null,
-              end_day: null,
-              name: null
-              
-            }))
-            .catch((error) => {
-              if(error){
+                }))
+                .catch((error) => {
+                    if(error){
+                      this.setState({
+                        message: "Nieprawidlowe dane",
+                        successful: false
+                        })
+                      }
+                  })
+                }
+            else{
               this.setState({
-                message: "Nieprawidlowe dane",
-                successful: false
+                successful: false,
+                message: "Godziny dnia nie zgadzają się z wprowadzonymi spotkaniami",
               })
             }
-            })
       }
       else{
         this.setState({
@@ -229,10 +284,8 @@ class DayPlanPage extends React.Component {
       }
   }
 
-  refresh(data){
-    this.setState({
-      meetings: data
-    })
+  reload(){
+    window.location.reload();
   }
 
   render() {
@@ -315,7 +368,6 @@ class DayPlanPage extends React.Component {
                   icons={tableIcons}
                   data= {this.state.table}
                   columns= {this.state.meetings_columns}
-
                   />
                   <br></br>
                 <Form onSubmit={this.handleEnd}
@@ -385,6 +437,7 @@ class DayPlanPage extends React.Component {
                   </div>
                   )}
 
+                 
                   <CheckButton
                     style={{ display: "none" }}
                     ref={c => {
@@ -394,6 +447,8 @@ class DayPlanPage extends React.Component {
                   <p class="m-0 text-center text-black small">Aby zobaczyć dostępne plany dnia kliknij w przekierowanie.<NavLink to="/plans" className="nav-link"> Plany dnia</NavLink> </p>
                     
                 </Form>
+
+                <button className="btn btn-secondary btn-block" onClick = {this.reload} >Rozpocznij dodawanie od nowa</button>
               </fieldset>
             </body>
           </section>
