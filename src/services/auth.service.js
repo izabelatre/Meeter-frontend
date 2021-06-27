@@ -24,8 +24,18 @@ class AuthService {
 
   colorChange(){
     
+    if(!localStorage.getItem("color")){
     localStorage.setItem("color", "yes")
+  }else{
+    if (localStorage.getItem("color") === "yes"){
+      localStorage.setItem("color", "no")
+    }
+    else{
+      localStorage.setItem("color", "yes")
+    }
+    }
   }
+
 
   register(user, email, pass) {
     return axios.post(API_URL + "register", {
