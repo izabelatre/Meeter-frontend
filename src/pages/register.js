@@ -18,10 +18,10 @@ const required = value => {
   };
 
   const vcode = value => {
-    if (value.length < 0 || value.length > 20) {
+    if (value.length < 0 || value.length > 40) {
       return (
         <div className="alert alert-danger" role="alert">
-          The code must be between 0 and 20 characters.
+          The code must be between 0 and 40 characters.
         </div>
       );
     }
