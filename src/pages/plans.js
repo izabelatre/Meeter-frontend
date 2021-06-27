@@ -103,14 +103,14 @@ class DisplayPage extends React.Component {
       { title: "Koniec spotkania", field: "end" }
     ],
     data_plans: [],
-    data_meetings: []
+    data_meetings: [],
+    initial_meetings: [],
+    selectedRowId: null
   };
 }
 
 handleDisplay(e) {
   e.preventDefault();
-
-
 
   this.form.validateAll();
 
@@ -145,7 +145,8 @@ componentDidMount () {
   axios.get(URL + 'plans', headers )
   .then(res => 
     this.setState({
-    data_plans: res.data}) 
+    data_plans: res.data,
+  initial_meetings: res.data.meetings}) 
   )
 }
 
@@ -194,6 +195,21 @@ onChangeSecondPlan(e) {
                   icons={tableIcons}
                   data= {this.state.data_plans}
                   columns= {this.state.columns_plans}
+                  options={{
+                    rowStyle: rowData => ({
+                      backgroundColor: rowData.tableData.id === Number.parseInt(this.state.selectedRowId)
+                          ? "#9bb8b3"
+                          : "#fff" 
+                      })
+                    
+                  }}
+                  onRowClick={(event, rowData) => {
+                    this.setState({ 
+                        selectedRowId: rowData.tableData.id,
+                        initial_meetings: this.state.data_plans[rowData.tableData.id].meetings
+                      });
+                    
+                  }}
                   editable={
                             {
                               onRowUpdate: (newData, oldData) =>
@@ -219,6 +235,18 @@ onChangeSecondPlan(e) {
                                   }),
                               }}
                   />
+                  <br></br>
+                  <p>Zaznacz wybrany plan aby wyświetlić jego spotkania.</p>
+
+                  <br></br>
+                  <MaterialTable
+                    icons={tableIcons}
+                    title="Spotkania"
+                    columns={this.state.columns_meetings}
+                    data={this.state.initial_meetings}
+            
+                  />
+
                   </div>
 
                   <Form
