@@ -29,15 +29,15 @@ const required = value => {
     }
   };
   
-  const email = value => {
-    if (!isEmail(value)) {
-      return (
-        <div className="alert alert-danger" role="alert">
-          This is not a valid email.
-        </div>
-      );
-    }
-  };
+  // const email = value => {
+  //   if (!isEmail(value)) {
+  //     return (
+  //       <div className="alert alert-danger" role="alert">
+  //         This is not a valid email.
+  //       </div>
+  //     );
+  //   }
+  // };
   
   const vpassword = value => {
     if (value.length < 6 || value.length > 40) {
@@ -126,9 +126,8 @@ class RegisterPage extends Component {
     
 
     render() {
-      if(localStorage.getItem("color")=== "yes"){
-        return (
-            
+     
+        return (     
             <div className="col-md-12">
                 <Navbar text1="Zarejestruj się" text2="Zaloguj się" />
             <div className="card card-container">
@@ -146,7 +145,7 @@ class RegisterPage extends Component {
                 {!this.state.successful && (
                   <div>
                        <div className="form-group">
-                  <label htmlFor="username">Code</label>
+                  <label htmlFor="username">Kod rejestracyjny</label>
                   <Input
                     type="text"
                     className="form-control"
@@ -159,15 +158,15 @@ class RegisterPage extends Component {
                 </div>
                     
                     <div className="form-group">
-                      <label htmlFor="email">Email</label>
+                      <label htmlFor="username">Nazwa użytkownika</label>
                       <Input
                         type="text"
                         className="form-control"
                         name="email"
                         value={this.state.email}
                         onChange={this.onChangeEmail}
-                        validations={[required, email]}
-                        placeholder="Email"
+                        validations={[required]}
+                        placeholder="Username"
                       />
                     </div>
     
@@ -180,7 +179,7 @@ class RegisterPage extends Component {
                         value={this.state.password}
                         onChange={this.onChangePassword}
                         validations={[required, vpassword]}
-                        placeholder="Hasło"
+                        placeholder="Password"
                       />
                     </div>
     <br></br>
@@ -215,103 +214,7 @@ class RegisterPage extends Component {
             </body>
             </div>
           </div>
-        );}
-        else{
-          return (
-            
-            <div className="col-md-12">
-                <Navbar text1="Zarejestruj się" text2="Zaloguj się" />
-            <div className="card card-container">
-                <br></br> <br></br>
-            <body class="login">
-              <fieldset class="login">
-              <Form
-                onSubmit={this.handleRegister}
-                ref={c => {
-                  this.form = c;
-                }}
-              >
-                  <h3>Rejestracja</h3>
-                  <br></br> 
-                {!this.state.successful && (
-                  <div>
-                       <div className="form-group">
-                  <label htmlFor="username">Code</label>
-                  <Input
-                    type="text"
-                    className="form-control"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
-                    placeholder="Code"
-                  />
-                </div>
-                    
-                    <div className="form-group">
-                      <label htmlFor="email">Email</label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.onChangeEmail}
-                        validations={[required, email]}
-                        placeholder="Email"
-                      />
-                    </div>
-    
-                    <div className="form-group">
-                      <label htmlFor="password">Hasło</label>
-                      <Input
-                        type="password"
-                        className="form-control"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.onChangePassword}
-                        validations={[required, vpassword]}
-                        placeholder="Hasło"
-                      />
-                    </div>
-    <br></br>
-                    <div className="form-group">
-                      <button className="btn btn-secondary btn-block">Zarejestruj się</button>
-                    </div>
-                  </div>
-                )}
-    
-                {this.state.message && (
-                  <div className="form-group">
-                    <div
-                      className={
-                        this.state.successful
-                          ? "alert alert-success"
-                          : "alert alert-danger"
-                      }
-                      role="alert"
-                    >
-                      {this.state.message}
-                    </div>
-                  </div>
-                )}
-                <CheckButton
-                  style={{ display: "none" }}
-                  ref={c => {
-                    this.checkBtn = c;
-                  }}
-                /><p style={{ 'white-space': 'pre-wrap'}}>
-                {this.state.isRegistered
-                
-                ? "Rejestracja udała się"
-                : ""}
-                </p>
-              </Form>
-              </fieldset>
-            </body>
-            </div>
-          </div>
         );
-        }
     }
 }
 
