@@ -174,7 +174,6 @@ class DayPlanPage extends React.Component {
         var lenght = this.state.meetings.length
         var check = true
         var check2 = false
-        console.log(lenght)
         
           if (this.state.start < this.state.end && (this.state.start.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) && (this.state.end.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) ) {   
             if(lenght!=0){
