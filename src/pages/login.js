@@ -101,7 +101,7 @@ class LoginPage extends Component {
                     <h3>Logowanie</h3>
                     <br></br>
                   <div className="form-group">
-                    <label htmlFor="username" >Email</label>
+                    <label htmlFor="username" >Nazwa użytkownika</label>
                     <Input
                       type="text"
                       className="form-control"
@@ -109,7 +109,7 @@ class LoginPage extends Component {
                       value={this.state.username}
                       onChange={this.onChangeUsername}
                       validations={[required]}
-                      placeholder="Email"
+                      placeholder="Username"
                     />
                   </div>
       

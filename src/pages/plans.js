@@ -230,6 +230,7 @@ onChangeSecondPlan(e) {
                   />
                   <br></br>
                   <p>Zaznacz wybrany plan aby wyświetlić jego spotkania.</p>
+                  
 
                   <br></br>
                   <MaterialTable
@@ -300,7 +301,7 @@ onChangeSecondPlan(e) {
                 )}
                         <br></br>
                         <div className="form-group">
-                          <button className="btn btn-secondary btn-block">Dodaj spotkanie</button>
+                          <button className="btn btn-secondary btn-block">Sprawdź spotkania</button>
                         </div>
                         <p style={{ 'white-space': 'pre-wrap'}}>{"Wszystkie pola muszą zostać uzupełnione. "}</p>           
                       </div>
