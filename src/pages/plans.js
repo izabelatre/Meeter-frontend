@@ -222,7 +222,7 @@ onChangeSecondPlan(e) {
                               }}
                   />
                   <br></br>
-                  <p>Zaznacz wybrany plan aby wyświetlić jego spotkania.</p>
+
 
                   <br></br>
  
