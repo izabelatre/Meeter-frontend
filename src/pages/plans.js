@@ -196,6 +196,13 @@ onChangeSecondPlan(e) {
                   data= {this.state.data_plans}
                   columns= {this.state.columns_plans}
 
+                  onRowClick={(event, rowData) => {
+                    this.setState({ 
+                        selectedRowId: rowData.tableData.id,
+                        initial_meetings: this.state.data_plans[rowData.tableData.id].meetings
+                      });
+                    
+                  }}
                   editable={
                             {
                               onRowUpdate: (newData, oldData) =>
@@ -222,10 +229,16 @@ onChangeSecondPlan(e) {
                               }}
                   />
                   <br></br>
-
+                  <p>Zaznacz wybrany plan aby wyświetlić jego spotkania.</p>
 
                   <br></br>
- 
+                  <MaterialTable
+                    icons={tableIcons}
+                    title="Spotkania"
+                    columns={this.state.columns_meetings}
+                    data={this.state.initial_meetings}
+            
+                  />
 
                   </div>
 
