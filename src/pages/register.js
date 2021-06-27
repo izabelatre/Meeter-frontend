@@ -1,3 +1,5 @@
+
+  
 import React, { Component } from "react";
 
 import Navbar from '../components/Navbar.js'
@@ -5,6 +7,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+
 import AuthService from "../services/auth.service";
 
 const required = value => {
@@ -16,12 +19,11 @@ const required = value => {
       );
     }
   };
-
-  const vcode = value => {
+  const vusername = value => {
     if (value.length < 0 || value.length > 40) {
       return (
         <div className="alert alert-danger" role="alert">
-          The code must be between 0 and 40 characters.
+          The code must be between 3 and 40 characters.
         </div>
       );
     }
@@ -53,14 +55,15 @@ class RegisterPage extends Component {
         super(props);
         this.handleRegister = this.handleRegister.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeCode = this.onChangeCode.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
     
         this.state = {
           email: "",
           password: "",
           successful: false,
-          message: ""
+          message: "",
+          isRegistered: false
         };
       }
       onChangeEmail(e) {
@@ -75,9 +78,9 @@ class RegisterPage extends Component {
         });
       }
 
-      onChangeCode(e) {
+      onChangeUsername(e) {
         this.setState({
-          code: e.target.value
+          username: e.target.value
         });
       }
     
@@ -113,7 +116,8 @@ class RegisterPage extends Component {
     
               this.setState({
                 successful: false,
-                message: resMessage
+                message: resMessage,
+                isRegistered: true
               });
             }
           );
@@ -122,14 +126,15 @@ class RegisterPage extends Component {
     
 
     render() {
+      if(localStorage.getItem("color")=== "yes"){
         return (
             
             <div className="col-md-12">
                 <Navbar text1="Zarejestruj się" text2="Zaloguj się" />
             <div className="card card-container">
                 <br></br> <br></br>
-            <body class="login">
-              <fieldset class="login">
+            <body class="login_color">
+              <fieldset class="login_color">
               <Form
                 onSubmit={this.handleRegister}
                 ref={c => {
@@ -140,14 +145,15 @@ class RegisterPage extends Component {
                   <br></br> 
                 {!this.state.successful && (
                   <div>
-                  <div className="form-group">
-                  <label >Code</label>
+                       <div className="form-group">
+                  <label htmlFor="username">Code</label>
                   <Input
                     type="text"
                     className="form-control"
-                    value={this.state.code}
-                    onChange={this.onChangeCode}
-                    validations={[required, vcode]}
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                    validations={[required, vusername]}
                     placeholder="Code"
                   />
                 </div>
@@ -177,7 +183,7 @@ class RegisterPage extends Component {
                         placeholder="Hasło"
                       />
                     </div>
-                    <br></br>
+    <br></br>
                     <div className="form-group">
                       <button className="btn btn-secondary btn-block">Zarejestruj się</button>
                     </div>
@@ -209,7 +215,103 @@ class RegisterPage extends Component {
             </body>
             </div>
           </div>
+        );}
+        else{
+          return (
+            
+            <div className="col-md-12">
+                <Navbar text1="Zarejestruj się" text2="Zaloguj się" />
+            <div className="card card-container">
+                <br></br> <br></br>
+            <body class="login">
+              <fieldset class="login">
+              <Form
+                onSubmit={this.handleRegister}
+                ref={c => {
+                  this.form = c;
+                }}
+              >
+                  <h3>Rejestracja</h3>
+                  <br></br> 
+                {!this.state.successful && (
+                  <div>
+                       <div className="form-group">
+                  <label htmlFor="username">Code</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                    validations={[required, vusername]}
+                    placeholder="Code"
+                  />
+                </div>
+                    
+                    <div className="form-group">
+                      <label htmlFor="email">Email</label>
+                      <Input
+                        type="text"
+                        className="form-control"
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.onChangeEmail}
+                        validations={[required, email]}
+                        placeholder="Email"
+                      />
+                    </div>
+    
+                    <div className="form-group">
+                      <label htmlFor="password">Hasło</label>
+                      <Input
+                        type="password"
+                        className="form-control"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.onChangePassword}
+                        validations={[required, vpassword]}
+                        placeholder="Hasło"
+                      />
+                    </div>
+    <br></br>
+                    <div className="form-group">
+                      <button className="btn btn-secondary btn-block">Zarejestruj się</button>
+                    </div>
+                  </div>
+                )}
+    
+                {this.state.message && (
+                  <div className="form-group">
+                    <div
+                      className={
+                        this.state.successful
+                          ? "alert alert-success"
+                          : "alert alert-danger"
+                      }
+                      role="alert"
+                    >
+                      {this.state.message}
+                    </div>
+                  </div>
+                )}
+                <CheckButton
+                  style={{ display: "none" }}
+                  ref={c => {
+                    this.checkBtn = c;
+                  }}
+                /><p style={{ 'white-space': 'pre-wrap'}}>
+                {this.state.isRegistered
+                
+                ? "Rejestracja udała się"
+                : ""}
+                </p>
+              </Form>
+              </fieldset>
+            </body>
+            </div>
+          </div>
         );
+        }
     }
 }
 

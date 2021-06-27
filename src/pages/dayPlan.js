@@ -179,13 +179,13 @@ class DayPlanPage extends React.Component {
           if (this.state.start < this.state.end && (this.state.start.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) && (this.state.end.match(/([0-1][0-9]|2[0-3]):[0-5][0-9]/)) ) {   
             if(lenght!=0){
               for(var i = 0 ; i < lenght ; i++){
-                if(this.state.start >= this.state.meetings[i].start && this.state.start <= this.state.meetings[i].end  )
+                if(this.state.start >= this.state.meetings[i].start && this.state.start <= this.state.meetings[i].end  ){
                   check = false
-                  check2 = true
+                  check2 = true}
               
-                if(this.state.end >= this.state.meetings[i].start && this.state.end <= this.state.meetings[i].end )
+                if(this.state.end >= this.state.meetings[i].start && this.state.end <= this.state.meetings[i].end ){
                   check = false
-                  check2 = true
+                  check2 = true}
               }
             }
             
@@ -204,7 +204,7 @@ class DayPlanPage extends React.Component {
             }
 
         else{
-          if(check2 = true){
+          if(check2 === true){
             this.setState(prevState => ({
               successful1: false,
               message1: "Spotkanie koliduje z już istniejącym."
