@@ -132,8 +132,8 @@ class RegisterPage extends Component {
                 <Navbar text1="Zarejestruj się" text2="Zaloguj się" />
             <div className="card card-container">
                 <br></br> <br></br>
-            <body class="login_color">
-              <fieldset class="login_color">
+            <body class="login">
+              <fieldset class="login">
               <Form
                 onSubmit={this.handleRegister}
                 ref={c => {
