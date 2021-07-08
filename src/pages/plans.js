@@ -95,8 +95,8 @@ class DisplayPage extends React.Component {
     columns_plans: [
       { title: "Nazwa", field: "name" },
       { title: "ID", field: "plan_id", editable: 'never'},
-      { title: "Start dnia", field: "day_start", editable: 'never'},
-      { title: "Koniec dnia", field: "day_end", editable: 'never' }
+      { title: "Start dnia", field: "day_start"},
+      { title: "Koniec dnia", field: "day_end"}
     ],
     columns_meetings: [
       { title: "Początek spotkania", field: "start"},
@@ -210,8 +210,8 @@ onChangeSecondPlan(e) {
                                     var newPlan = {
                                       id: oldData.id,
                                       name: newData.name,
-                                      day_start: oldData.day_start,
-                                      day_end: oldData.day_end,
+                                      day_start: newData.day_start,
+                                      day_end: newData.day_end,
                                       meetings: oldData.meetings
                                       
                                 }
@@ -233,13 +233,33 @@ onChangeSecondPlan(e) {
                   
 
                   <br></br>
-                  <MaterialTable
+                  {/* <MaterialTable
                     icons={tableIcons}
                     title="Spotkania"
                     columns={this.state.columns_meetings}
                     data={this.state.initial_meetings}
             
-                  />
+                    editable={
+                      {
+                        onRowUpdate: (newData, oldData) =>
+                          new Promise((resolve, reject) => {
+                              var newPlan = {
+                                start: newData.start,
+                                end: newData.end  
+                          }
+                                            
+                          axios.put(URL + "plans/" + oldData.plan_id, newPlan, headers)
+                              resolve(this.getPlans())   
+                              }),
+
+                        onRowDelete: oldData =>
+                          new Promise((resolve, reject) => {
+                          axios.delete(URL + "plans/" + oldData.plan_id, headers)
+                          resolve(this.getPlans())
+                            }),
+                        }}
+                        
+                  /> */}
 
                   </div>
 
